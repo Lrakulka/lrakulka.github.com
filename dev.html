@@ -8,8 +8,8 @@
        function Make(){
            var url = location.href;
            img1.src = (url.match(/photo=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
-           Name.value = (url.match(/first_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
-           SoName.value = (url.match(/last_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
+           Name.value = decodeURI((url.match(/first_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/));
+           SoName.value = decodeURI((url.match(/last_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/));
        }
    </script>
 </head>

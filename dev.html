@@ -3,20 +3,21 @@
 <head>
    <meta charset="utf-8">
    <title>RefRegistr</title>
-   <script type="text/javascript">
+   <script>
        function Make(){
            var url = location.href;
-           alert(url);
+           img1.src = url.match(/photo=[a-z0-9-]{3,}&/);
+           alert(url.match(/photo=[a-z0-9-]{3,}&/));
        }
    </script>
 </head>
-<body>
+<body onLoad="Make()">
 <form method="post">
     <table>
         <tbody>
         <tr>
             <th><label for="img1">Аватарка:</label></th>
-            <td><img  id="img1" src=""></td>
+            <td><img  id="img1" ></td>
         </tr>
         <tr>
             <th><label for="Name">Ім'я:</label></th>

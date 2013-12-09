@@ -6,8 +6,9 @@
    <script>
        function Make(){
            var url = location.href;
-           img1.src = url.match(/photo=[a-z0-9-]{3,}&/);
-           alert(url.match(/photo=[a-z0-9-]{3,}&/));
+           img1.src = (url.match(/photo=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
+           Name.value = (url.match(/first_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
+           SoName.value = (url.match(/last_name=[^&]{2,}/)).toString().match(/=[^&]{2,}/).toString().match(/[^=]{2,}/);
        }
    </script>
 </head>

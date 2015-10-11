@@ -1,33 +1,364 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-   <meta charset="utf-8">
-   <title>Test site</title>
-   <script type="text/javascript" src="//vk.com/js/api/openapi.js?105"></script>
-
-   <script type="text/javascript">
-     VK.init({apiId: 4048491});
-   </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Часть 2. HID устройство для вращения камеры / Хабрахабр</title>
+    <meta name="keywords" content="микроконтроллер ATtiny85, драйвер двигателей l293d, V-USB, Skype API">
 </head>
 <body>
-<!--
-<div>
-   <div id="vk_auth"></div>
-   <script type="text/javascript">
-     VK.Widgets.Auth("vk_auth", {width: "200px", authUrl: '/dev'});
-   </script>
+   
+<div class="post_show">
+        
+
+  <div class="post shortcuts_item" id="post_215841">
+    <div class="published">14 марта 2014 в 16:22</div>
+    <h1 class="title">
+      
+        <span class="post_title">Часть 2. HID устройство для вращения камеры</span>
+
+      <a href="/sandbox/" class="flag flag_sandbox" title="Перейти в песочницу">из песочницы</a>
+
+
+          <a title="Редактировать публикацию" class="edit" href="/topic/edit/215841/">
+            <img src="/images/topic_edit.gif" width="16" height="16" alt="Редактировать"></a>
+    </h1>
+
+    <div class="hubs">
+		<a href="http://habrahabr.ru/hub/programming/" class="hub subscribed" title="Вы подписаны на этот хаб">Программирование</a><span class="profiled_hub" title="Профильный хаб">*</span>
 </div>
--->
-<h1>Turutu</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- AdTest1 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7530468547300238"
-     data-ad-slot="4023882108"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+
+
+    <div class="content html_format">
+      <img src="http://habrastorage.org/getpro/habr/post_images/0c9/ca0/8d1/0c9ca08d1af7d3c37f5e0f58e59c404b.jpg" alt="image"><br>
+Это продолжение моей статьи об устройстве для вращения Веб-камеры (предыдущую статью можно найти <a href="http://habrahabr.ru/sandbox/79829/">тут</a>).<br>
+<br>
+В этой части я расскажу о создании программной части: прошивки для микроконтроллера ATtiny85 и программы для компьютера, для того что бы иметь возможность управлять устройством.<br>
+<a name="habracut"></a><br>
+Для создания прошивки микроконтроллера и ПО я использовал готовый проект, переработав его под себя.(<a href="http://we.easyelectronics.ru/electro-and-pc/usb-dlya-avr-chast-2-hid-class-na-v-usb.html">Эта</a> информация обязательна к прочтению, так как подробности описывать я не буду).<br>
+<br>
+<h5>Прошивка микроконтроллера</h5><br>
+Прошивка в зависимости от команды программы управления устанавливает ножки 1, 3, 4, 5 в логичную 1 или 0. Также если на протяжении 2 секунд не поступает никакая команда – то все четыре ножки устанавливаются в 0, это сделано для того, что бы при сбое работы программы на ПК устройство не зацикливалось на выполнении последней команды (писал прошивку на AVR Studio4, эта среда не дружит с кириллицей, поэтому проверяйте адреса. Также для тестирования прошивки можно использовать PROTEUS):<br>
+<pre><code class="hljs cpp">...
+<span class="hljs-keyword">if</span>(bytesRemaining == <span class="hljs-number">0</span>)     <span class="hljs-comment">// Все данные получены</span>
+    {                           <span class="hljs-comment">// Выставим значения на PORTB</span>
+        <span class="hljs-keyword">if</span> ( pdata.b1 )         <span class="hljs-comment">//Запись состояния ножки 1 из структуры</span>
+            PORTB |= _BV(<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">else</span>
+            PORTB &amp;= ~_BV(<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">if</span> ( pdata.b2 )         <span class="hljs-comment">//Запись состояния ножки 3 из структуры</span>
+            PORTB |= _BV(<span class="hljs-number">3</span>);
+        <span class="hljs-keyword">else</span>
+            PORTB &amp;= ~_BV(<span class="hljs-number">3</span>);
+        <span class="hljs-keyword">if</span> ( pdata.b3 )         <span class="hljs-comment">//Запись состояния ножки 4 из структуры</span>
+            PORTB |= _BV(<span class="hljs-number">4</span>);
+        <span class="hljs-keyword">else</span>
+            PORTB &amp;= ~_BV(<span class="hljs-number">4</span>);
+
+        <span class="hljs-keyword">if</span> ( pdata.b4 )         <span class="hljs-comment">//Запись состояния ножки 5 из структуры</span>
+            PORTB |= _BV(<span class="hljs-number">5</span>);
+        <span class="hljs-keyword">else</span>
+            PORTB &amp;= ~_BV(<span class="hljs-number">5</span>);
+    }
+...
+ <span class="hljs-keyword">if</span>(i==<span class="hljs-number">200</span>)           <span class="hljs-comment">//сброс 1,3,4,5 ножки в 0 через 2сек</span>
+	{
+	    PORTB &amp;= ~_BV(<span class="hljs-number">1</span>);
+	    PORTB &amp;= ~_BV(<span class="hljs-number">3</span>);
+	    PORTB &amp;= ~_BV(<span class="hljs-number">4</span>);
+	    PORTB &amp;= ~_BV(<span class="hljs-number">5</span>);
+	}
+...
+</code></pre><br>
+<h5>Недостача ножки</h5><br>
+В Attiny85 всего 8 ножек. Две из них для питания микроконтроллера. Одна для сброса данных, а ещё две задействованы для использования USB интерфейса. Остается три свободных, но мне надо 4 ножки для управления двумя двигателями.<br>
+<br>
+<img src="http://habrastorage.org/getpro/habr/post_images/ede/8b5/18e/ede8b518eae4bfad7699e60fec30d3b8.jpg" alt="image"><br>
+<br>
+Выйти с этой ситуации можно двумя способами: первый – сдвиговый регистр (с его помощью можно увеличить количество управляемых выходов до нужного, но при этом придется пожертвовать скоростью и надёжностью. См. <a href="http://avrproject.ru/publ/kak_podkljuchit/bascom_avr_74hc595/2-1-0-44">тут</a>);<br>
+Другой – использовать fuse bit, что бы переопределить ножку Reset в обычную вход/выход. (Прочитать можна<a href="http://www.getchip.net/posts/068-kak-pravilno-proshit-avr-fyuzy-fuse-bit/">тут</a>).<br>
+Я воспользовался вторым способом и установил в fuses RSTDISBL в 0. (При считывании fuses с помощью SinaProg у меня выскакивала ошибка. Решение которой нашёл <a href="http://forum.easyelectronics.ru/viewtopic.php?t=2975&amp;p=52301">тут</a>).<br>
+При прошивке микроконтроллера с такими параметрами fuses, снова перепрошить его можно будет только высоковольтным программатором, поэтому необходимо перепроверять настройку, особенно в usbconfig.h. (Содержаться настройки для V-USB)<br>
+При неудачных прошивках необходимо вручную в «диспетчере устройств» удалить драйвер, который устанавливает ОС для вашего устройства. Иначе неправильно установленный драйвер будет использоваться дальше для всех последующих прошивок микроконтроллера.<br>
+<br>
+<h5>Программа управления</h5><br>
+Я использовал готовый код, поэтому проблем с настройкой связи у меня не возникло. Данная часть кода отвечает за формирование и отправку команд, а также за получение информации про состояние устройства (в данном случае за состояние ножек 1 3 4 5. Привожу толька класс):<br>
+<br>
+<pre><code class="hljs cpp"><span class="hljs-preprocessor">#<span class="hljs-keyword">define</span> Max <span class="hljs-number">230</span></span>
+
+<span class="hljs-keyword">class</span> Device{
+   <span class="hljs-keyword">class</span> <span class="hljs-keyword">dataexchange_t</span>		<span class="hljs-comment">// Описание структуры для передачи данных</span>
+	{
+	<span class="hljs-keyword">public</span>:
+	   <span class="hljs-keyword">char</span> b1;        <span class="hljs-comment">// Я решил написать структуру на 4 байта.</span>
+	   <span class="hljs-keyword">char</span> b2;        <span class="hljs-comment">// На каждый байт подцепим ногу из PORTB. Конечно это</span>
+	   <span class="hljs-keyword">char</span> b3;        <span class="hljs-comment">// не рационально (всего то 4 бита нужно).</span>
+	   <span class="hljs-keyword">char</span> b4;
+	}data;
+   <span class="hljs-keyword">class</span> Position{
+	<span class="hljs-keyword">public</span>:
+		<span class="hljs-keyword">float</span> x;
+		<span class="hljs-keyword">float</span> y;
+   }positionTransform, cameraPosition;     <span class="hljs-comment">/* positionTransform - нужно для хранения трансформированных 
+                                             градусных значений в мою систему cameraPosition - записуеться 
+											 текущее положение камеры в градусах */</span>
+   HIDLibrary &lt;<span class="hljs-keyword">dataexchange_t</span>&gt; hid; <span class="hljs-comment">// создаем экземпляр класса с типом нашей структуры</span>
+   <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> processTime;       <span class="hljs-comment">// для уменьшения количества ненужного обращения к устройству</span>
+   FILE *f;                         <span class="hljs-comment">// файл для сохранения последнего положения камеры</span>
+   <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">SendData</span><span class="hljs-params">(dataexchange_t *)</span></span>;
+<span class="hljs-keyword">public</span>:
+   <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Connect</span><span class="hljs-params">()</span></span>;
+   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetCameraPosition</span><span class="hljs-params">(<span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> *, <span class="hljs-keyword">short</span> <span class="hljs-keyword">int</span> *)</span></span>;
+   <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">MoveCamera</span><span class="hljs-params">()</span></span>;
+   <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">StopMoveCamera</span><span class="hljs-params">()</span></span>;
+   Device()
+   {
+	   processTime = <span class="hljs-number">10</span>;
+	   (<span class="hljs-keyword">int</span>&amp;)data = positionTransform.x = positionTransform.y = <span class="hljs-number">0</span>;
+	   f = fopen(<span class="hljs-string">"CameraPosition.txt"</span>,<span class="hljs-string">"r+"</span>);
+	   <span class="hljs-built_in">fscanf</span>(f,<span class="hljs-string">"%f %f"</span>, &amp;cameraPosition.x, &amp;cameraPosition.y);
+	   <span class="hljs-keyword">if</span>(cameraPosition.x &lt; -Max || cameraPosition.y &lt; -Max || cameraPosition.y &gt; Max || cameraPosition.x &gt; Max)
+		   cameraPosition.x = cameraPosition.y = <span class="hljs-number">0</span>;
+   }
+   ~Device()
+   {   
+	   fclose(f);
+   }
+};
+...
+</code></pre><br>
+<br>
+Так как я отказался от вращения камеры на 360 градусов, пришлось програмно ввести ограничение на 230 градусов, то есть камера вращается влево (230 градусов) и вправо (-230 градусов) на 230 градусов относительно начала. (Стоит отметить, что программное ограничение это худшее решение такой проблемы, лучше было бы установить механические выключатели, которые выключали бы одну из цепей питания двигателя).<br>
+<br>
+Также я ввёл специфичную координатную ось для управления поворотом камеры, чтобы не нагружать ОС постоянной отправкой команд. Пользователь водит на сколько градусов надо повернуть камеру относительно текущего положения. Далее введённые градусы преобразуются в несколько команд, которые с интервалом в 2 секунды должны будут отправлены на устройство.<br>
+<pre><code class="hljs cpp">...
+  <span class="hljs-comment">// Трансформация градусной координаты в мою по горизонтали(камера вращается после команды 2сек)</span>
+	<span class="hljs-keyword">if</span>(*x &gt; <span class="hljs-number">0</span>)
+		positionTransform.x = (*x * <span class="hljs-number">0.20832</span>); <span class="hljs-comment">// разная скорость вращения по часовой стрелке и против</span>
+	<span class="hljs-keyword">else</span> positionTransform.x = (*x * <span class="hljs-number">0.225</span>);  
+	<span class="hljs-comment">// Трансформация градусной координаты в мою по вертикали(камера вращается после команды 2сек)</span>
+	<span class="hljs-keyword">if</span>(*y &gt; <span class="hljs-number">0</span>)
+		positionTransform.y = (*y * <span class="hljs-number">0.20832</span>); 
+	<span class="hljs-keyword">else</span> positionTransform.y = (*y * <span class="hljs-number">0.225</span>);  
+...
+</code></pre><br>
+<br>
+Устройство сначала поворачивает камеру по горизонтали, а потом по вертикали, чтобы не перегружать USB порт одновременным питанием двух двигателей.<br>
+<br>
+В результате получилось, что микроконтроллер управляется программой с компьютера, который в свою очередь управляет драйвером двигателя (Я использовал L293), а он уже управляет двумя двигателями.<br>
+<br>
+<h5>Передача видео- и аудио-сигнала</h5><br>
+ Мне не обходимо было передать сигнал с камеры и управлять ей на расстоянии. Выход я нашёл в использовании API Skype (Проблема была только в том, что API Skype больше не поддерживается, поэтому есть баги). Для использования API Skype необходимо на диск, где установлена ОС скопировать файл Skype4COM.dll.<br>
+<br>
+Моя программа для Skype мониторит чат с клиентом – пользователем, который использует моё устройство. При введении пользователем в чате команды старта работы камеры (В данном случае команда «0000») программа сделает видео-звонок и включит устройство. После этого пользователь может управлять камерой путём введения следующих команд в чат:<br>
+<br>
+«StopMove MoveTo('X'@'Y') VideoOn VideoOff Wait'TimeInSec'». (На команду VideoOff скайп сначала выключит камеру, а потом сразу включает, если в ручном режиме сначала включить видео показ, то эта команда работает нормально):<br>
+<br>
+<pre><code class="hljs zephir">...
+<span class="hljs-keyword">char</span> comandName[] = {<span class="hljs-string">"###"</span>};  <span class="hljs-comment">// Логин клиента </span>
+  <span class="hljs-keyword">char</span> comandStart[] = {<span class="hljs-string">"0000"</span>};           <span class="hljs-comment">// Команда старта </span>
+  <span class="hljs-keyword">int</span> timeWait = <span class="hljs-number">500</span>;                      <span class="hljs-comment">// Максимальное время бездействия клиента</span>
+  
+	 <span class="hljs-comment">// Инициализмруем COM соединение </span>
+ CoInitialize(<span class="hljs-keyword">NULL</span>); 
+ 
+  <span class="hljs-comment">// Создаем Skype объект </span>
+  SKYPE4COMLib::ISkypePtr pSkype(__uuidof(SKYPE4COMLib::Skype)); 
+ 
+  <span class="hljs-comment">// Соединяемся с Skype API </span>
+  pSkype-&gt;Attach(<span class="hljs-number">6</span>,VARIANT_TRUE); 
+
+  _bstr_t comand;
+  IChatMessagePtr curMessage, privMessage = <span class="hljs-keyword">NULL</span>;
+  COleDateTime startTime(time(<span class="hljs-keyword">NULL</span>));
+  
+  <span class="hljs-keyword">for</span>(;;)<span class="hljs-comment">// нужно еще условие выхода допилить</span>
+  {
+	  curMessage = pSkype-&gt;GetMessages((_bstr_t)comandName)-&gt;GetItem(<span class="hljs-number">1</span>); <span class="hljs-comment">// Получаем последние сообщение от клиента</span>
+	  comand = curMessage-&gt;GetBody();  <span class="hljs-comment">// Получаем текст сообщения</span>
+	  <span class="hljs-keyword">if</span>(!strcmp((<span class="hljs-keyword">char</span>*)comand,comandStart) &amp;&amp; (privMessage == <span class="hljs-keyword">NULL</span> || 
+		  privMessage-&gt;GetId() != curMessage-&gt;GetId()) &amp;&amp; (startTime.m_dt &lt; curMessage-&gt;GetTimestamp()))
+		{
+			privMessage = curMessage;
+			curMessage-&gt;PutSeen(<span class="hljs-keyword">true</span>); <span class="hljs-comment">// Отмечаем полученное сообщение как прочитанное</span>
+			ControlDevice(pSkype, comandName, timeWait, privMessage);		
+		}
+		<span class="hljs-keyword">else</span> Sleep(<span class="hljs-number">5000</span>);
+  }
+...
+_bstr_t comand;
+  IChatMessagePtr curMessage;
+  <span class="hljs-keyword">int</span> timeToSendMessage = (timeWait/<span class="hljs-number">100</span>)*<span class="hljs-number">80</span>;
+  Device device;
+  ICallPtr call;
+  <span class="hljs-comment">// Проверка (Если звоним клиенту, то положить трубку)</span>
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = pSkype-&gt;GetActiveCalls()-&gt;GetCount(); i != <span class="hljs-number">0</span> ; i--)
+  {
+	  call = pSkype-&gt;GetActiveCalls()-&gt;GetItem(i); <span class="hljs-comment">// Получить текущие звонки</span>
+	  <span class="hljs-keyword">if</span>(!strcmp((<span class="hljs-keyword">char</span>*)(call-&gt;GetPartnerHandle()),comandName))
+	  {
+		  call-&gt;Finish(); <span class="hljs-comment">// Положить трубку</span>
+		  Sleep(<span class="hljs-number">2000</span>);
+		  <span class="hljs-keyword">break</span>;
+	  }
+  }
+  call = pSkype-&gt;PlaceCall(_bstr_t(comandName), L<span class="hljs-string">""</span>, L<span class="hljs-string">""</span>, L<span class="hljs-string">""</span>);  <span class="hljs-comment">// Звоним клиенту</span>
+  pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"З'єднання розпочате"</span>)); 
+  <span class="hljs-keyword">if</span>(!device.Connect())                                                 <span class="hljs-comment">// Подключаемся к устройству</span>
+    pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"Пристрій управління не підключен"</span>));	
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; timeWait &amp;&amp; call-&gt;Status != clsInProgress;i++)       <span class="hljs-comment">// Ожидания поднятия трубки клиентом</span>
+	  Sleep(<span class="hljs-number">20</span>);
+  <span class="hljs-keyword">if</span>(call-&gt;Status == clsInProgress)
+  {
+    Sleep(<span class="hljs-number">2000</span>);
+	call-&gt;StartVideoSend();  <span class="hljs-comment">// Включить видео(иногда не работает)</span>
+	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> time = <span class="hljs-number">0</span>; call-&gt;Status == clsInProgress;time++)
+	{
+		<span class="hljs-keyword">if</span>(time &gt;= timeWait)  <span class="hljs-comment">// Если время ожидания кончилось - положить трубку</span>
+		{
+			call-&gt;Finish();
+			<span class="hljs-keyword">break</span>;
+		}
+		curMessage = pSkype-&gt;GetMessages((_bstr_t)comandName)-&gt;GetItem(<span class="hljs-number">1</span>);
+		<span class="hljs-keyword">if</span>(curMessage-&gt;GetId() != privMessage-&gt;GetId()) <span class="hljs-comment">// Ловим сообщения в чате</span>
+		{
+		  privMessage = curMessage;
+		  <span class="hljs-keyword">if</span>(time &gt; <span class="hljs-number">0</span>)
+	        time = <span class="hljs-number">0</span>;
+		  <span class="hljs-keyword">if</span>(!ComandToDevice((<span class="hljs-keyword">char</span>*)curMessage-&gt;GetBody(),&amp;device,pSkype,comandName,&amp;time,call))<span class="hljs-comment">// Отправка сообщения для обработки</span>
+			  pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"Команда не виконана"</span>)); 
+		  curMessage-&gt;PutSeen(<span class="hljs-keyword">true</span>);
+		}
+		Sleep(<span class="hljs-number">200</span>);
+		<span class="hljs-keyword">if</span>(!device.MoveCamera())
+		{
+			pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"Проблеми з пристроєм управління"</span>));	
+			device.StopMoveCamera();
+		}
+		<span class="hljs-keyword">if</span>(timeToSendMessage == time)
+			pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"Час очікування команди спливає"</span>)); 
+	}
+  }
+  
+  pSkype-&gt;SendMessage(_bstr_t(comandName), _bstr_t(L<span class="hljs-string">"З'єднання завершено"</span>)); 
+}
+...
+</code></pre><br>
+Видео демонстрации работы устройства.<br>
+<br>
+<iframe width="560" height="349" src="//www.youtube.com/embed/e8YDh1pZeuA?wmode=opaque" frameborder="0" allowfullscreen=""></iframe><br>
+<br>
+Полностью весь проект можна взять <a href="http://webfile.ru/file/b75212ba1ae191477d1ba822d27abcfb">тут</a>.
+      <div class="clear"></div>
+    </div>
+
+    
+<ul class="tags">
+	<li><a href="http://habrahabr.ru/search/?q=%5B%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D0%BB%D0%B5%D1%80%20ATtiny85%5D&amp;target_type=posts" rel="tag">микроконтроллер ATtiny85</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5B%D0%B4%D1%80%D0%B0%D0%B9%D0%B2%D0%B5%D1%80%20%D0%B4%D0%B2%D0%B8%D0%B3%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%20l293d%5D&amp;target_type=posts" rel="tag">драйвер двигателей l293d</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5BV-USB%5D&amp;target_type=posts" rel="tag">V-USB</a></li><li>, <a href="http://habrahabr.ru/search/?q=%5BSkype%20API%5D&amp;target_type=posts" rel="tag">Skype API</a></li>
+</ul>
+
+      <div class="infopanel_wrapper">
+    <ul class="postinfo-panel postinfo-panel_post" id="infopanel_post_215841">
+      <!-- Виджет голосования за пост -->
+          <li class="postinfo-panel__item">
+            <div class="voting-wjt js-voting  ">
+                <button type="button" disabled="" class="voting-wjt__button voting-wjt__button_plus js-plus" title="За свои публикации голосовать нельзя. Срок голосования истек.">
+                  <span>↑</span>
+                </button>
+
+              <div class="voting-wjt__counter voting-wjt__counter_positive  js-mark">
+                  <span class="voting-wjt__counter-score js-score" title="Общий рейтинг 33: ↑27 и ↓6">+21</span>
+              </div>
+
+                <button type="button" disabled="" class="voting-wjt__button voting-wjt__button_minus js-minus" title="За свои публикации голосовать нельзя.Срок голосования истек.">
+                  <span>↓</span>
+                </button>
+
+            </div>
+          </li>
+
+      <!-- Количество просмотров публикации -->
+
+      <li class="postinfo-panel__item">
+        <div class="views-count_post" title="Просмотры публикации">13135</div>
+      </li>
+
+      <!-- Кнопка «Добавить в избранное» -->
+      <li class="postinfo-panel__item">
+        <div class="favorite-wjt favorite">
+            <button type="button" class="favorite-wjt__button add" title="Добавить в избранное" onclick="return posts_add_to_favorite(this, '2', 215841);">
+              <span>В избранное</span>
+            </button>
+          <span class="favorite-wjt__counter js-favs_count" title="Количество пользователей, добавивших публикацию в избранное">108</span>
+        </div>
+      </li>
+
+
+
+
+      <!-- шеринг в соцсети -->
+        <li class="postinfo-panel__item postinfo-panel__item_socials  postinfo-panel__item_socials_right ">
+          <ul class="post-share">
+            <li class="post-share__item">
+              <a href="http://twitter.com/intent/tweet?text=%D0%A7%D0%B0%D1%81%D1%82%D1%8C+2.+HID+%D1%83%D1%81%D1%82%D1%80%D0%BE%D0%B9%D1%81%D1%82%D0%B2%D0%BE+%D0%B4%D0%BB%D1%8F+%D0%B2%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F+%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D1%8B+http://habr.ru/p/215841/+via+%40habrahabr+%23habr" class="post-share__item-link twitter" title="Опубликовать ссылку в Twitter" target="_blank"></a>
+            </li>
+            <li class="post-share__item">
+              <a href="https://vk.com/share.php?url=http://habrahabr.ru/post/215841/" class="post-share__item-link vkontakte" title="Опубликовать ссылку во ВКонтакте" onclick="window.open(this.href, 'Опубликовать ссылку во Вконтакте', 'width=800,height=300'); return false"></a>
+            </li>
+            <li class="post-share__item">
+              <a href="https://www.facebook.com/sharer/sharer.php?u=http://habrahabr.ru/post/215841/" class="post-share__item-link facebook" title="Опубликовать ссылку в Facebook" onclick="window.open(this.href, 'Опубликовать ссылку в Facebook', 'width=640,height=436,toolbar=0,status=0'); return false"></a>
+            </li>
+            <li class="post-share__item">
+              <a href="https://getpocket.com/edit?url=http://habrahabr.ru/post/215841/" target="_blank" class="post-share__item-link pocket" title="Добавить ссылку в Pocket"></a>
+            </li>
+          </ul>
+        </li>
+
+      <!-- кнопка пожаловаться -->
+    </ul>
+  </div>
+
+        
+
+  <div class="author-info author-info_top">
+    <a href="/users/Kotovoin" class="author-info__image">
+      <img src="http://habrahabr.ru/i/avatars/stub-user-middle.gif" class="author-info__image-pic">
+    </a>
+
+    <div class="author-info__desc">
+      <div class="author-info__username">
+        <a href="/users/Kotovoin" class="author-info__nickname">@Kotovoin</a>
+
+        <div class="karma__widjet voting-wjt voting-wjt_small js-karma" title="Карма пользователя">
+
+
+          <div class="voting-wjt__counter voting-wjt__counter_positive">
+            <span class="voting-wjt__label">карма</span>
+            <span class="voting-wjt__counter-score js-karma_num">11,0</span>
+          </div>
+
+        </div>
+
+        <div class="user-rating" title="Рейтинг пользователя">
+          <span class="user-rating__label">рейтинг</span>
+          <span class="user-rating__value">0,0</span>
+        </div>
+      </div>
+
+          <div class="author-info__specialization">
+            <a href="https://habrahabr.ru/auth/settings/profile/#user_specializm" class="author-info__link_dotted"> Написать о себе</a>
+            <span class="author-info__info_helper">(Например: Программист)</span>
+          </div>
+
+          <div class="author-info__contacts">
+            <a href="https://habrahabr.ru/auth/settings/profile/#user_contacts" class="author-info__link_dotted"> Ваши ссылки</a>
+            <span class="author-info__info_helper">(Личный сайт, Фейсбук, Твиттер и др.)</span>
+          </div>
+    </div>
+  </div>
+
+  </div>
+
+
+      </div>
 </body>
 </html>

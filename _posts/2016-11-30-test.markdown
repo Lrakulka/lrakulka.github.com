@@ -1,6 +1,0 @@
----
-published: true
-title: ergyreyregererd
-layout: post
----
-ewrg

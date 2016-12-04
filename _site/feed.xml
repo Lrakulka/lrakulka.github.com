@@ -1,40 +1,398 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Your awesome title</title>
-    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
-</description>
+    <title>Some of my projects that I would like to share</title>
+    <description></description>
     <link>http://yourdomain.com/</link>
     <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 02 Dec 2016 14:24:27 +0100</pubDate>
-    <lastBuildDate>Fri, 02 Dec 2016 14:24:27 +0100</lastBuildDate>
+    <pubDate>Sun, 04 Dec 2016 22:47:28 +0100</pubDate>
+    <lastBuildDate>Sun, 04 Dec 2016 22:47:28 +0100</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>Personal tracker</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/images/CoverImage.jpg&quot; alt=&quot;Cover Image&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;About this project&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;I have created a system which uses smartphone to track people. It can be useful for next purposes: tracking children, workers, grandparents&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Goal&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This project was created for tracking how people work. For example we need a worker to distribute the add to people. But we can’t follow him. That’s why we can’t be sure that the work was properly done.&lt;/p&gt;
+
+&lt;p&gt;For such goals I created this system which can remotely take a photo or a video on a worker’s personal smartphone.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Principle of the system&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;One smartphone (controller) uses ARTIK Cloud to send actions to another smartphone (tracker). After obtaining of the action (makePhoto/ setOnVideo/ setOffVideo) from the controller, the tracker executes it and sends message result of the successful execution to the controller. Also the tracker sends coordinates of the location to ARTIK Cloud. When the coordinates of the location are inside of the area which is set by the user of the controller device, ARTIK Cloud sends a letter to an email of user’s controller.
+&lt;img src=&quot;/images/System.jpg&quot; alt=&quot;Illustration of system&quot; /&gt;
+&lt;strong&gt;ARTIK Cloud Configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The first step is to create Device Type and Manifest. How to create Device Type your can read &lt;a href=&quot;https://developer.artik.cloud/documentation/tutorials/an-iot-remote-control.html#create-and-connect-a-new-device-type&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Manifest.jpg&quot; alt=&quot;Manifest&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The second step is to create application. How to create Application your can read &lt;a href=&quot;https://developer.artik.cloud/documentation/tutorials/your-first-application.html#create-an-application&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Rule.jpg&quot; alt=&quot;Illustration of system&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tracker&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My application for controller uses &lt;a href=&quot;https://tyrus.java.net/&quot;&gt;Project Tyrus&lt;/a&gt; to create the WebSocket connection.&lt;/p&gt;
+
+&lt;p&gt;To configure an application you need to fill these fields with your data. This data you can find &lt;a href=&quot;https://artik.cloud/my/devices&quot;&gt;here&lt;/a&gt; in the menu device info.&lt;/p&gt;
+
+&lt;p&gt;public static final String DEVICE_ID = “&lt;YOUR DEVICE=&quot;&quot; ID=&quot;&quot;&gt;&quot;;&lt;/YOUR&gt;&lt;/p&gt;
+
+&lt;p&gt;public static final String DEVICE_TOKEN = “&lt;YOUR DEVICE=&quot;&quot; TOKEN=&quot;&quot;&gt;&quot;;&lt;/YOUR&gt;&lt;/p&gt;
+
+&lt;p&gt;To start working you need to press the button “Do It” and then to wait for the ARTIK Cloud response (&lt;em&gt;“Connected” if everything is okay or “Error code” if not&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/device-2016-09-26-202827.png&quot; alt=&quot;Illustration of system&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For the controller I used ARTIK API Java/Android. For my app I used the application from the example. For the configuration you need to config next fields:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;// Copy from the corresponding application in the Developer Dashboard&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;public static final String CLIENT_ID = “&lt;YOUR APPLICATION=&quot;&quot; ID=&quot;&quot;&gt;&quot;;&lt;/YOUR&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;// Copy from the Device Info screen in My ARTIK Cloud&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;private final static String DEVICE_ID = “&lt;YOUR DEVICE=&quot;&quot; ID=&quot;&quot;&gt;&quot;;&lt;/YOUR&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;// Response of application when success authorized&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;public static final String REDIRECT_URL = “&lt;REDIRECT URL=&quot;&quot; OF=&quot;&quot; APPLICATION=&quot;&quot;&gt;&quot;;&lt;/REDIRECT&gt;&lt;/p&gt;
+
+&lt;p&gt;When app starts the first time you need to login in your Samsung account.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/device-2016-09-26-192830.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Also ARTIK Cloud has an interface which allows you to monitor messages and actions of your device.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/DataLog.jpg&quot; alt=&quot;DataLog&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Demonstration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;iframe width=&quot;638&quot; height=&quot;365&quot; src=&quot;https://www.youtube.com/embed/sn_eqTXcs9E&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;strong&gt;The possible use of the system&lt;/strong&gt;&lt;/p&gt;
+
+&lt;iframe width=&quot;638&quot; height=&quot;365&quot; src=&quot;https://www.youtube.com/embed/rIoEeqKyUf4&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Lrakulka/ARTIK_Cloud_Camera_Tracker&quot;&gt;Git source tracker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Lrakulka/ARTIK_Cloud_Camera_Controller&quot;&gt;Git source controller&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 02 Dec 2016 14:23:18 +0100</pubDate>
-        <link>http://yourdomain.com/jekyll/update/2016/12/02/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://yourdomain.com/jekyll/update/2016/12/02/welcome-to-jekyll.html</guid>
+        <pubDate>Thu, 29 Sep 2016 01:00:00 +0200</pubDate>
+        <link>http://yourdomain.com/iot/android/samsung/artik/cloud/2016/09/29/Personal-tracker.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/iot/android/samsung/artik/cloud/2016/09/29/Personal-tracker.html</guid>
         
         
-        <category>jekyll</category>
+        <category>IoT</category>
         
-        <category>update</category>
+        <category>Android</category>
+        
+        <category>Samsung</category>
+        
+        <category>ARTIK</category>
+        
+        <category>Cloud</category>
+        
+      </item>
+    
+      <item>
+        <title>Extender of Smartphone Camera</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/images/tmp_image_0.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;About this project&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This project allows to take out the camera module of smartphone.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Story&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I am currently working on a big project which requires portable computer and fixing the camera on head. This project is the hardware part of my big project.&lt;/p&gt;
+
+&lt;p&gt;I decided to modify a smartphone because it has all what I need for my project except possibility to take the camera module outside. I took my LG P700 for experiment with the camera extending.&lt;/p&gt;
+
+&lt;p&gt;I started from collection of information and found next scheme of the main camera connector of LG P700. I used it to create a connector for my adapter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/RyZoPjBQ789DGUIaiQdm.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/SqMJsLcgIzWHZz6VQ51i.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried to create the adapter twice. The first try was not successful but I found out that my phone camera module connect to motherboard with a 40-pin connector, where 7 pins are used to supply electricity of 1.8 and 2.8 voltage, 10 pins are paired into 5 signal lines for transmitting of high speed digital signals, other pins are used for ground or for low speed signals.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/4r76GBUN4gFwvOBJjmkd.jpg&quot; alt=&quot;The connector of camera modul&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Also I found out that I need to put capacitors because extending of the signals line length are decreasing power of signal ( That is why I used capacitors to solve this problem, I placed the capacitors between the ground and the data line. In addition, the capacitors must be placed as close to the camera connector as possible). The second problem that I faced was the different signal lines length which was cause of error in the camera module. I solved this by making all the lines the same length.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bW7VngGVfrKJ4MZUXfH9.jpg&quot; alt=&quot;The adapter&#39;s connector scheme&quot; /&gt;
+&lt;img src=&quot;/images/EFNp9h9qppxFWFvjQ09p.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;iframe width=&quot;638&quot; height=&quot;365&quot; src=&quot;https://www.youtube.com/embed/evcpW-UT2E4&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+        <pubDate>Mon, 14 Mar 2016 00:00:00 +0100</pubDate>
+        <link>http://yourdomain.com/modification/camera/extender/2016/03/14/Extender-of-Smartphone-Camera.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/modification/camera/extender/2016/03/14/Extender-of-Smartphone-Camera.html</guid>
+        
+        
+        <category>modification</category>
+        
+        <category>camera</category>
+        
+        <category>extender</category>
+        
+      </item>
+    
+      <item>
+        <title>Skype Web-turret</title>
+        <description>&lt;p&gt;&lt;img src=&quot;/images/EfguIR5wruZfjfLPKfSB.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;About this project&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Web-turret is a webcam which can be rotated in horizontal and vertical axes by commands from Skype chat.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Brief project description&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For the rotation of a webcam we need two engines and two reduction drives. We need a reduction drive to decrease the speed of the camera rotation and for increasing the rotation power. We need to use a microcontroller and a motor drive for the control engines (The Power of a microcontroller is not enough to supply the engines with the energy that is why we use a motor driver). Also we need to write a program for the microcontroller and for the Skype chat which can read the commands from the chat and send them to the microcontroller.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The device for the rotation webcam&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I was lucky to find the engines and reduction drives in the toys.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/4YpiG1CVazxVKregACsy.jpg&quot; alt=&quot;The motor and the reduction drive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I faced a big problem during the creation of the device which can rotate in any direction. The problem was in the winding of the cable on the axis. I decided to use the bearings to solved this problem. I soldered one wire to the outer ring, and another to the inner ring but it didn’t help because during bearing rotation the connection between webcam and a computer disappeared for a couple of milliseconds and it was enough for computer to disconnect the webcam and only the physical reconnection of the webcam helps to return the connection between the webcam and a computer.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/x1jAkMgQPj2Fo3cP6SQJ.jpg&quot; alt=&quot;My fail experiment with the bearing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In another try I decided to try the sliding contacts. I created from copper foil seven tracks for the sliding contacts but I had to stop on this position because of the quality of tracks. I understood that I need more qualification work than I could do.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/k37RKlx8aNi3KkloaYjj.jpg&quot; alt=&quot;My second try with the sliding contacts&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I needed help from the outside. I created the scheme of the sliding contacts and found people who could created it for me (The process of gathering all together you can see below).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/lAsx8A0nH3Ohi0grx5ef.jpg&quot; alt=&quot;1&quot; /&gt;
+&lt;img src=&quot;/images/WfgS7xVsobpwUikzjtvf.jpg&quot; alt=&quot;2&quot; /&gt;
+&lt;img src=&quot;/images/Kh8PW24rFuEUxnk0ixQR.jpg&quot; alt=&quot;3&quot; /&gt;
+&lt;img src=&quot;/images/rJ9HhCu0bdsLFe7pBfCG.jpg&quot; alt=&quot;4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(I covered the slighting contacts with the aluminium foil to protect against the electromagnetic fields)&lt;/p&gt;
+
+&lt;p&gt;This variant worked much better than the variant with the bearing but it had the same problem with the disconnection that is why I decided to refuse the full rotation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The engine controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I chose the breadboard AVR-USB-TINY45 which has microcontroller ATtiny85 and a nice USB connector.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/WI6g82IPbzHcrpNTDxcc.jpg&quot; alt=&quot;The breadboard AVR-USB-TINY45(85)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Also I created an adapter for programming the microcontroller because the breadboard AVR-USB-TINY45 has a connector ISP6 and my programator has ISP10.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/SqMJsLcgIzWHZz6VQ51i.jpg&quot; alt=&quot;The adapter&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I used PROTEUS to create the scheme of the controller and for the simulation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/0g6c9aOeIEBroWlfhTv1.jpg&quot; alt=&quot;The scheme and real look of the controller&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Program for the microcontroller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The program is controls the motor driver by setting four legs of the microcontroller in logical one or zero. Also the program sets all legs to logical zero if it doesn’t get new commands during 200 milliseconds (I did it for protection against looping of the last command)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;#define Max 230 
+class Device {    
+    // Class is uses as container for exchange information between PC and web-turret
+    class dataexchange_t { 	
+    public: 	   
+	char b1;        
+	char b2;     // We need only 4 bits to contain commands for all 4 legs but 
+	char b3;     // I decided to use 4 bytes because it&#39;s more comfortable to use.
+	char b4; 	
+    } data;    
+    class Position { 	
+    public: 		
+	float x; 		
+	float y;    
+    } positionTransform, cameraPosition;     
+/* 
+ * positionTransform - contains transformed coordinates 
+ * cameraPosition - contains current camera position 
+*/    
+    HIDLibrary &amp;lt;dataexchange_t&amp;gt; hid; 
+    unsigned char processTime;   // Variable is decreasing number of request to device
+    FILE *f;                     // I save last position of the camera in this file
+    int SendData(dataexchange_t *);  // This method sends commands to the device 
+public:    
+    bool Connect();                  
+    void SetCameraPosition(short int *, short int *);   
+    bool MoveCamera();    
+    bool StopMoveCamera();    
+    Device() { 	   
+	processTime = 10; 	   
+	(int&amp;amp;) data = positionTransform.x = positionTransform.y = 0; 	   
+	f = fopen(&quot;CameraPosition.txt&quot;,&quot;r+&quot;); 	   
+	fscanf(f,&quot;%f %f&quot;, &amp;amp;cameraPosition.x, &amp;amp;cameraPosition.y); 	
+	// Limits check   
+	if (cameraPosition.x &amp;lt; -Max || cameraPosition.y &amp;lt; -Max || 
+	        cameraPosition.y &amp;gt; Max || cameraPosition.x &amp;gt; Max) 		   
+	    cameraPosition.x = cameraPosition.y = 0;    
+    }    
+    ~Device() {    	   
+	fclose(f);    
+    } 
+}; 
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I created the specific coordinate axis system to control the camera rotating process. This system decreases amount of commands which are sent over the communication channel. The principle of this system is next: the user types how many degrees he wanted to rotate the camera from the current position then the program converts entered degrees to amount of commands that with an interval of 2 seconds must be sent to the device.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;...  
+// My transformation of the camera position coordinates 
+// Device has different speed of rotation that is why I use two constants  
+// Axis X
+if(*x &amp;gt; 0) 		
+    positionTransform.x = (*x * 0.20832);  // The constant for clockwise rotation 
+else positionTransform.x = (*x * 0.225); // The constant for counterclockwise rotation
+// Axis Y
+if(*y &amp;gt; 0) 		
+    positionTransform.y = (*y * 0.20832);  
+else positionTransform.y = (*y * 0.225);   
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I made the device to rotate the camera in a horizontal direction first , and then in a vertically axis, I did so because I wanted to avoid overloading of the USB power lines by two motors working simultaneously.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Skype&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I wanted to have possibility to control Web-turret remotely. I decided to use the Skype API to control the device and to transmit video and sound from web-camera. If you decided to use the Skype API you should download Skype4COM.dll and put it into Windows carnal directory (I used Windows 7 for this project).&lt;/p&gt;
+
+&lt;p&gt;I wrote the program for Skype which monitors Skype chat with the owner. If the owner write in chat with the web-turret command “0000”, the program will start a video call and turn on the web-turret. The user can control the camera by typing the following commands in the chat:&lt;/p&gt;
+
+&lt;p&gt;StopMove - stops the web-turret rotation&lt;/p&gt;
+
+&lt;p&gt;MoveTo(‘X’@’Y’) - rotation by the vertical(X) axis and the horizontal(Y) axis&lt;/p&gt;
+
+&lt;p&gt;VideoOn - turn on video&lt;/p&gt;
+
+&lt;p&gt;VideoOff - turn off video&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I must note that I use old version of Skype API (This version was outdated even in 2014).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-C&quot;&gt;... 
+char comandName[] = {&quot;###&quot;};        // Skype login of the owner  
+char comandStart[] = {&quot;0000&quot;};      // Start command    
+int timeWait = 500;                 // Maximum time of the owner inactivity   
+CoInitialize(NULL);   
+  
+SKYPE4COMLib::ISkypePtr pSkype(__uuidof(SKYPE4COMLib::Skype));  // Create Skype object      
+pSkype-&amp;gt;Attach(6,VARIANT_TRUE); // Connection to Skype API   
+   
+_bstr_t comand;   
+IChatMessagePtr curMessage, privMessage = NULL;   
+COleDateTime startTime(time(NULL));     
+// Monitoring of the Skype chat with owner
+for (;;) { // Dummy loop 
+    // Get last message from client	  
+    curMessage = pSkype-&amp;gt;GetMessages((_bstr_t)comandName)-&amp;gt;GetItem(1); 
+    // Get text from last message
+    comand = curMessage-&amp;gt;GetBody();
+    // Check if message is new
+    // Check for start command
+    if ((privMessage == NULL || privMessage-&amp;gt;GetId() != curMessage-&amp;gt;GetId()) &amp;amp;&amp;amp; 
+            (!strcmp((char*) comand, comandStart)) &amp;amp;&amp;amp;
+            (startTime.m_dt &amp;lt; curMessage-&amp;gt;GetTimestamp())) { 
+        privMessage = curMessage; 			
+        curMessage-&amp;gt;PutSeen(true); // Set message as read
+	ControlDevice(pSkype, comandName, timeWait, privMessage);		 
+    } else {
+        Sleep(5000); 
+    }  
+} 
+...
+_bstr_t comand;   
+IChatMessagePtr curMessage;   
+int timeToSendMessage = (timeWait / 100) * 80;   
+Device device;   
+ICallPtr call;   
+// Check if we making call to the owner then put down call
+for (int i = pSkype-&amp;gt;GetActiveCalls()-&amp;gt;GetCount(); i != 0 ; i--) { 	  
+    call = pSkype-&amp;gt;GetActiveCalls()-&amp;gt;GetItem(i); // Get all current calls 
+    if (!strcmp((char*) (call-&amp;gt;GetPartnerHandle()), comandName)) { 		              call-&amp;gt;Finish(); // Put down call		  
+        Sleep(2000); 		  
+        break; 	  
+    }   
+}   
+// Start call to the owner 
+call = pSkype-&amp;gt;PlaceCall(_bstr_t(comandName), L&quot;&quot;, L&quot;&quot;, L&quot;&quot;);  
+// Sent message to the owner
+pSkype-&amp;gt;SendMessage(_bstr_t(comandName), _bstr_t(L&quot;Connection started&quot;)); 
+// Connection to web-turret   
+if (!device.Connect()) { 
+    pSkype-&amp;gt;SendMessage(_bstr_t(comandName), 
+        _bstr_t(L&quot;The web-turret not found&quot;));	 
+}  
+// Wait until the owner take call 
+for (int i = 0; i &amp;lt; timeWait &amp;amp;&amp;amp; call-&amp;gt;Status != clsInProgress; i++) {      
+    Sleep(20);   
+}
+if (call-&amp;gt;Status == clsInProgress) {     
+    Sleep(2000); 	
+    call-&amp;gt;StartVideoSend();  // Turn video on (Sometimes not works)
+    for(int time = 0; call-&amp;gt;Status == clsInProgress;time++) { 	    	
+        if(time &amp;gt;= timeWait) {  // If time of waiting ends then put down call 	                  call-&amp;gt;Finish(); 			
+            break; 		
+        } 		
+        curMessage = pSkype-&amp;gt;GetMessages((_bstr_t)comandName)-&amp;gt;GetItem(1); 		if (curMessage-&amp;gt;GetId() != privMessage-&amp;gt;GetId()) { //Catch the owners messages 	    privMessage = curMessage; 		  
+            if (time &amp;gt; 0) { 	        
+                time = 0; 
+            }		  
+            // Sent command to the web-turret
+            if (!ComandToDevice((char*) curMessage-&amp;gt;GetBody(),
+                        &amp;amp;device, pSkype, comandName, &amp;amp;time, call)) {
+                pSkype-&amp;gt;SendMessage(_bstr_t(comandName), 
+                        _bstr_t(L&quot;The command not executed&quot;));  
+            }		  
+            curMessage-&amp;gt;PutSeen(true); 		
+        } 		
+        Sleep(200); 		
+        if (!device.MoveCamera()) { 			
+            pSkype-&amp;gt;SendMessage(_bstr_t(comandName), 
+                _bstr_t(L&quot;Some problem with the web-turret&quot;));	 		
+            device.StopMoveCamera(); 		
+        } 		
+        if (timeToSendMessage == time) {			
+                pSkype-&amp;gt;SendMessage(_bstr_t(comandName), 
+                        _bstr_t(L&quot;Time of a command expecting is ended&quot;)); 
+        } 
+    } 
+}     
+pSkype-&amp;gt;SendMessage(_bstr_t(comandName), _bstr_t(L&quot;Connection is over&quot;));  
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;iframe width=&quot;638&quot; height=&quot;365&quot; src=&quot;https://www.youtube.com/embed/e8YDh1pZeuA&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Lrakulka/Web-turret&quot;&gt;Git source&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Jun 2014 01:00:00 +0200</pubDate>
+        <link>http://yourdomain.com/iot/webcam/microcontroller/skyprapi/2014/06/14/Skype-Web-turret.html</link>
+        <guid isPermaLink="true">http://yourdomain.com/iot/webcam/microcontroller/skyprapi/2014/06/14/Skype-Web-turret.html</guid>
+        
+        
+        <category>IoT</category>
+        
+        <category>Webcam</category>
+        
+        <category>Microcontroller</category>
+        
+        <category>SkyprAPI</category>
         
       </item>
     

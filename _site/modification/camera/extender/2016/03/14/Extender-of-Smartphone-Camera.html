@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Extender of Smartphone Camera</title>
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://yourdomain.com/jekyll/update/2016/12/02/welcome-to-jekyll.html">
-  <link rel="alternate" type="application/rss+xml" title="Some of my projects which I would like to share" href="http://yourdomain.com/feed.xml">
+  <link rel="canonical" href="http://yourdomain.com/modification/camera/extender/2016/03/14/Extender-of-Smartphone-Camera.html">
+  <link rel="alternate" type="application/rss+xml" title="Some of my projects that I would like to share" href="http://yourdomain.com/feed.xml">
 </head>
 
 
@@ -21,7 +21,7 @@
 
   <div class="wrapper">
 
-    <a class="site-title" href="/">Some of my projects which I would like to share</a>
+    <a class="site-title" href="/">Some of my projects that I would like to share</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -57,25 +57,39 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Welcome to Jekyll!</h1>
-    <p class="post-meta"><time datetime="2016-12-02T14:23:18+01:00" itemprop="datePublished">Dec 2, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Extender of Smartphone Camera</h1>
+    <p class="post-meta"><time datetime="2016-03-14T00:00:00+01:00" itemprop="datePublished">Mar 14, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <p><img src="/images/tmp_image_0.jpg" alt="" /></p>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p><strong>About this project</strong></p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<p>This project allows to take out the camera module of smartphone.</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<p><strong>Story</strong></p>
 
-<p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p>I am currently working on a big project which requires portable computer and fixing the camera on head. This project is the hardware part of my big project.</p>
 
+<p>I decided to modify a smartphone because it has all what I need for my project except possibility to take the camera module outside. I took my LG P700 for experiment with the camera extending.</p>
+
+<p>I started from collection of information and found next scheme of the main camera connector of LG P700. I used it to create a connector for my adapter.</p>
+
+<p><img src="/images/RyZoPjBQ789DGUIaiQdm.jpg" alt="" /></p>
+
+<p><img src="/images/SqMJsLcgIzWHZz6VQ51i.jpg" alt="" /></p>
+
+<p>I tried to create the adapter twice. The first try was not successful but I found out that my phone camera module connect to motherboard with a 40-pin connector, where 7 pins are used to supply electricity of 1.8 and 2.8 voltage, 10 pins are paired into 5 signal lines for transmitting of high speed digital signals, other pins are used for ground or for low speed signals.</p>
+
+<p><img src="/images/4r76GBUN4gFwvOBJjmkd.jpg" alt="The connector of camera modul" /></p>
+
+<p>Also I found out that I need to put capacitors because extending of the signals line length are decreasing power of signal ( That is why I used capacitors to solve this problem, I placed the capacitors between the ground and the data line. In addition, the capacitors must be placed as close to the camera connector as possible). The second problem that I faced was the different signal lines length which was cause of error in the camera module. I solved this by making all the lines the same length.</p>
+
+<p><img src="/images/bW7VngGVfrKJ4MZUXfH9.jpg" alt="The adapter's connector scheme" />
+<img src="/images/EFNp9h9qppxFWFvjQ09p.jpg" alt="" /></p>
+
+<iframe width="638" height="365" src="https://www.youtube.com/embed/evcpW-UT2E4" frameborder="0" allowfullscreen=""></iframe>
 
   </div>
 

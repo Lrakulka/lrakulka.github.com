@@ -124,6 +124,7 @@ And there are still other roles to implement. If the robots were to take place i
 to dribble with opponents, pass the ball between each other and perhaps form a rudimentary strategy. There are a lot of possible avenues of development, and seeing how programming such robots is a lot of fun, someone is bound to explore them further soon.
 
 **VI. TEACHING AIDS**
+
 Save for materials provided by Professor Voos Holger and Doctor Patrice Caire, we have used following sources while
 working on our robots:
 • Video tutorials from Robocum ETH team - https://www.youtube.com/playlist?list=PLX5LVYI-ZPJvrVhLjUKJLD9gZsKthsAKB

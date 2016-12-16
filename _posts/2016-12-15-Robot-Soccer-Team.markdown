@@ -5,7 +5,7 @@ date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
 ---
 
-*Report of my team*
+***Report of my team***
 
 Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” 
 done during Autonomous Robot Software course during winter semester 2017.

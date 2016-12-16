@@ -9,6 +9,9 @@ categories: NAO robots soccer
 
 Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.
 
+![Our Team]()
+Oleksandr Borysov Jacek Lebioda Piotr Matyjaszczyk
+
 **I. INTRODUCTION**
 
 The winter 2017 Autonomous Robot Software course consisted of two parts.
@@ -30,7 +33,13 @@ The main aims of the lecture were:
 
 The entire course took a single semester and finished with a small, friendly tournament where the two teams let loose their
 robots at each other. Yet it took some time to achieve level of comprehension allowing for such a match. 
+
+![Teams hard at work]()
+
 Before taking part in the course we had little to none practical experience with NAO robots, and the theoretical basics were lacking as well. Luckily, these three months had proven to be enough to fill the gaps. The entire course began with lectures covering the basics of robotics and current state of this field. The students were shown around University’s laboratories and experienced how does the work on programming modern day robots look like. Lecture concerning basics of ROS was also included into this part. It provided us with an understanding of basics of robotics, and a strong motivator for learning, as the drones made quite an impression on us.
+
+![Life test]()
+
 Afterwards, we have moved on to more practical issue - teaching our robots how to play ball. At first we reviewed most of the B-Human team documents and tutorials on our own, while receiving further lectures. Both the lectures and the tutorials we were going over helped us understand how does the framework work, while documentation gave us some understanding of how one solves problems related to football playing with robots.
 The B-Human materials proved to be our constant companion. We had to spend another week or two to understand of how do the things work in the code, but we have eventually managed to do it, with some advice from more experienced students and Dr. Cairie. Seeing how a lot of useful functions and procedures were already in the files, this helped us immensely when programming our robots. And this was precisely what we have gotten to next. We spent the next few weeks developing existing Striker role and creating the Goalie role from scratch. Luckily enough, we did not have to submit the robots themselves to iteration after iteration of our code; the B-Human package contained a simulator that allowed us to test even the craziest ideas without risking bodily harm of the robots.
 Eventually we have managed to implement the roles and create animations required for the robots to act as we ordered them to. Only afterwards had we moved from the simulator to NAOs, and confronted simulated results with real life. 

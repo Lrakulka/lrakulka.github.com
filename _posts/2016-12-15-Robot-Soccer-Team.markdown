@@ -19,6 +19,7 @@ This report mostly focuses on practicalities, explaining how our work looked lik
 **II. AIMS OF THE PROJECT**
 
 The main aims of the lecture were:
+
 1. Teach the students the fundamentals of robotic vision, sensing, localisation, navigation and intelligent controls.
 2. Provide students with some hands-on experience with ROS software
 3. Provide students with hands-on experience with the latest versions of the robot soccer software from the the worlds best robot soccer team today: ”B-Human”

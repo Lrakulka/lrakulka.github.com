@@ -32,6 +32,7 @@ the worlds best robot soccer team today: ”B-Human”
 and attempts to intercept all incoming shots) and Striker(Robot that attempts to score a goal)
 
 **III. LEARNING PROCESS**
+
 The entire course took a single semester and finished with a small, friendly tournament where the two teams let loose their
 robots at each other. Yet it took some time to achieve level of comprehension allowing for such a match. 
 Before taking part in the course
@@ -54,3 +55,76 @@ and creating the Goalie role from scratch. Luckily enough, we did not have to su
 after iteration of our code; the B-Human package contained a simulator that allowed us to test even the craziest ideas without
 risking bodily harm of the robots.
 Eventually we have managed to implement the roles and create animations required for the robots to act as we ordered
+them to. Only afterwards had we moved from the simulator to NAOs, and confronted simulated results with real life. 
+After spending another few hours on fine-tuning the code we have finally managed to achieve satisfactory results. 
+A day later the teams have met on the green grass for the friendly match.
+To top it all off, we have received an interesting lecture concerning topics we had not necessarily needed during our
+development process - Cognitive AI and Maps, localisation and navigation.
+
+**IV. RESULTS**
+
+All in all, we have managed to complete all of the tasks we had planned. We have received solid, theoretical background, allowing us to develop ourselves in the field of robotics. We were taught the basics of sensing, intelligent controls, robotic vision and navigation, and some ideas concerning Cognitive AI and maps were explained to us.
+We have played around with ROS software and learnt from the best as to how to program a NAO robot for playing
+football. Finally, we have managed to program the roles of Striker and Goalie. And all of in a pleasant atmosphere of fun and
+companionship.
+
+**V. ISSUES AND POSSIBLE DEVELOPMENTS**
+
+There were quite a few issues we had to face while developing our application. Save for most obvious problems
+that always appear when getting into a new project, there were a few that required hard decisions to be made.
+Firstly, there was the issue of picking a role for our robot. At first we have had the robot look around, and decide which
+role should he take depending on distance to the ball and characteristic points. This proved fairly impractical, though,
+as the robot had to go through a bootstrap phase to measure required distances. Eventually we have let the decision be
+made based on the robot ID. This is probably the best option, and will remain applicable even during ”big” matches, at least
+for initial set-up.
+
+```C
+Listing 1. PlayingState.h
+
+option (PlayingState)
+{
+  initialstate(play)
+  {
+    transition
+    {
+      if (theRobotInfo.number != 1 ) {
+      Striker();
+    } else {
+      Goalie () ;
+    }
+   }
+ }
+}
+```
+
+Another thing we have had to decide on was to how to make the Goalie detect the incoming shot. At first we were
+attempting to measure change of distance to the ball in two consecutive moments, but this meant that we have had to
+introduce our own timers and sleeps for it to be possible. While the timer idea (which checks how much time has passed since
+the last test, and if enough - measures the distance to the ball again and compares it with previous one) held some promise,
+we found trying to implement it impractical. Eventually we have decided to rely on simple distance to the ball, seeing
+how the ball usually will not approach enough for the goalie to react in course of normal play.
+```C
+Listing 2. Goalie.h
+if ( theBallModel.estimate.position.norm() < 1100.f ) // If the ball is close enough
+  goto defendTheShot;
+// It means, that the shot has been
+/ / made and it should be defended
+```
+Striker had his own issues, and they have shown themselves only after we moved to real life.
+First of them were the problems with kick strength. While creating the animation responsible for kick, we have easily
+managed to modify the parameters to allow for a strong kick. Surprisingly, these changes caused robot to fall, whenever
+kicking. It turned out, that rather than modify the kick itself, we have altered the angle at which the striker held his feet. In simulator this translated into greater strength imparted on the ball, but it also caused this toppling behaviour with the striker. Another issue, was related to lighting. At first, the striker detected both the ball and the goal, and then attempted to set up the shot accordingly. This behaviour was preserved on the master branch of our repository. As it soon turned out, in real life the robot was usually unable to notice the ball. This made him approach it, and then start looking around in search of goal - which usually lead to him accidentally kicking the ball sideways.
+Seeing how we had little influence on the lighting, we had to dumb the robot down. Since during kickoffs the kicker will
+be set up so as to have both the ball and goal in front of him, all we left in was setting up behind the ball and kicking it.
+This gave much improved results, although it is more of a stopgap solution. To be quite honest, there are more possible developments than actual code. While we have learnt a lot while working on NAOs, there is a lot more that could be done.
+As far as Goalie is concerned, two things that could be done would be teaching him to defend without falling down, and to
+get ready for another defence after punching the ball away. Striker is working fine as is, although some thought could
+be given to him aiming at a place in opponent’s goal for the ball to give as wide a berth as possible to opponent’s goalie.
+And there are still other roles to implement. If the robots were to take place in actual robot’s Olympics, they would need
+to dribble with opponents, pass the ball between each other and perhaps form a rudimentary strategy. There are a lot of possible avenues of development, and seeing how programming such robots is a lot of fun, someone is bound to explore them further soon.
+
+**VI. TEACHING AIDS**
+Save for materials provided by Professor Voos Holger and Doctor Patrice Caire, we have used following sources while
+working on our robots:
+• Video tutorials from Robocum ETH team - https://www.youtube.com/playlist?list=PLX5LVYI-ZPJvrVhLjUKJLD9gZsKthsAKB
+• Code used by B-Human - https://www.b-human.de/downloads/publications/2013/CodeRelease2013.pdf

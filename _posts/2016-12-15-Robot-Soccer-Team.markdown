@@ -73,12 +73,7 @@ option (PlayingState)
 }
 ```
 
-Another thing we have had to decide on was to how to make the Goalie detect the incoming shot. At first we were
-attempting to measure change of distance to the ball in two consecutive moments, but this meant that we have had to
-introduce our own timers and sleeps for it to be possible. While the timer idea (which checks how much time has passed since
-the last test, and if enough - measures the distance to the ball again and compares it with previous one) held some promise,
-we found trying to implement it impractical. Eventually we have decided to rely on simple distance to the ball, seeing
-how the ball usually will not approach enough for the goalie to react in course of normal play.
+Another thing we have had to decide on was to how to make the Goalie detect the incoming shot. At first we were attempting to measure change of distance to the ball in two consecutive moments, but this meant that we have had to introduce our own timers and sleeps for it to be possible. While the timer idea (which checks how much time has passed since the last test, and if enough - measures the distance to the ball again and compares it with previous one) held some promise, we found trying to implement it impractical. Eventually we have decided to rely on simple distance to the ball, seeing how the ball usually will not approach enough for the goalie to react in course of normal play.
 ```C
 Listing 2. Goalie.h
 if ( theBallModel.estimate.position.norm() < 1100.f ) // If the ball is close enough
@@ -89,7 +84,8 @@ if ( theBallModel.estimate.position.norm() < 1100.f ) // If the ball is close en
 Striker had his own issues, and they have shown themselves only after we moved to real life.
 First of them were the problems with kick strength. While creating the animation responsible for kick, we have easily
 managed to modify the parameters to allow for a strong kick. Surprisingly, these changes caused robot to fall, whenever
-kicking. It turned out, that rather than modify the kick itself, we have altered the angle at which the striker held his feet. In simulator this translated into greater strength imparted on the ball, but it also caused this toppling behaviour with the striker. Another issue, was related to lighting. At first, the striker detected both the ball and the goal, and then attempted to set up the shot accordingly. This behaviour was preserved on the master branch of our repository. As it soon turned out, in real life the robot was usually unable to notice the ball. This made him approach it, and then start looking around in search of goal - which usually lead to him accidentally kicking the ball sideways.
+kicking. It turned out, that rather than modify the kick itself, we have altered the angle at which the striker held his feet. In simulator this translated into greater strength imparted on the ball, but it also caused this toppling behaviour with the striker. 
+Another issue, was related to lighting. At first, the striker detected both the ball and the goal, and then attempted to set up the shot accordingly. This behaviour was preserved on the master branch of our repository. As it soon turned out, in real life the robot was usually unable to notice the ball. This made him approach it, and then start looking around in search of goal - which usually lead to him accidentally kicking the ball sideways.
 Seeing how we had little influence on the lighting, we had to dumb the robot down. Since during kickoffs the kicker will
 be set up so as to have both the ball and goal in front of him, all we left in was setting up behind the ball and kicking it.
 This gave much improved results, although it is more of a stopgap solution. To be quite honest, there are more possible developments than actual code. While we have learnt a lot while working on NAOs, there is a lot more that could be done.

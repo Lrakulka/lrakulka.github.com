@@ -103,5 +103,6 @@ to dribble with opponents, pass the ball between each other and perhaps form a r
 
 Save for materials provided by Professor Voos Holger and Doctor Patrice Caire, we have used following sources while
 working on our robots:
+
 1. Video tutorials from Robocum ETH team - https://www.youtube.com/playlist?list=PLX5LVYI-ZPJvrVhLjUKJLD9gZsKthsAKB
 2. Code used by B-Human - https://www.b-human.de/downloads/publications/2013/CodeRelease2013.pdf

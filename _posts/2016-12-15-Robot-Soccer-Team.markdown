@@ -9,7 +9,7 @@ categories: NAO robots soccer
 
 Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.
 
-![Our Team]()
+![Our Team](/images/title23375445.png)
 Oleksandr Borysov Jacek Lebioda Piotr Matyjaszczyk
 
 **I. INTRODUCTION**
@@ -34,11 +34,11 @@ The main aims of the lecture were:
 The entire course took a single semester and finished with a small, friendly tournament where the two teams let loose their
 robots at each other. Yet it took some time to achieve level of comprehension allowing for such a match. 
 
-![Teams hard at work]()
+![Teams hard at work](/images/title23375445.png)
 
 Before taking part in the course we had little to none practical experience with NAO robots, and the theoretical basics were lacking as well. Luckily, these three months had proven to be enough to fill the gaps. The entire course began with lectures covering the basics of robotics and current state of this field. The students were shown around University’s laboratories and experienced how does the work on programming modern day robots look like. Lecture concerning basics of ROS was also included into this part. It provided us with an understanding of basics of robotics, and a strong motivator for learning, as the drones made quite an impression on us.
 
-![Life test]()
+![Life test](/images/WP_20161208_14_21_51_Pro_LI.jpg)
 
 Afterwards, we have moved on to more practical issue - teaching our robots how to play ball. At first we reviewed most of the B-Human team documents and tutorials on our own, while receiving further lectures. Both the lectures and the tutorials we were going over helped us understand how does the framework work, while documentation gave us some understanding of how one solves problems related to football playing with robots.
 The B-Human materials proved to be our constant companion. We had to spend another week or two to understand of how do the things work in the code, but we have eventually managed to do it, with some advice from more experienced students and Dr. Cairie. 

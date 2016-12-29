@@ -9,8 +9,7 @@ categories: NAO robots soccer
 
 Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.
 
-![Our Team](/images/title23375445.png)
-Oleksandr Borysov Jacek Lebioda Piotr Matyjaszczyk
+![Our Team](/images/team.png)
 
 **I. INTRODUCTION**
 

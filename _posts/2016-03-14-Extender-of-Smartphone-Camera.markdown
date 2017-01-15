@@ -3,6 +3,8 @@ layout: post
 title:  "Extender of Smartphone Camera"
 date:   2016-03-14 00:00:00 +0100
 categories: modification camera extender
+previewImg: http://lrakulka.github.io/images/tmp_image_0.jpg
+info: This project allows to take out the camera module of smartphone.
 ---
 
 ![](/images/tmp_image_0.jpg)

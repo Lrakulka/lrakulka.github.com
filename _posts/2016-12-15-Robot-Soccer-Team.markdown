@@ -4,7 +4,7 @@ title:  "Robot Soccer Team"
 date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
 ---
-<img src="https://github.com/favicon.ico" width="48">
+<img src="https://youtu.be/MgTiuLhjhVA" width="48">
 
 
 ***Test of our goalkeeper (Click on the image to see video)***

@@ -7,9 +7,7 @@ categories: NAO robots soccer
 
 ***Test of our goalkeeper (Click on the image to see video)***
 
-[![Grand Dukes of Luxembourg tests their goalkeeper](https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg)](https://youtu.be/MgTiuLhjhVA)
-
-<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" ></iframe>
+<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
 ***Report of my team***
 

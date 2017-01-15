@@ -9,7 +9,7 @@ categories: NAO robots soccer
 
 [![Grand Dukes of Luxembourg tests their goalkeeper](https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg)](https://youtu.be/MgTiuLhjhVA)
 
-<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" ></iframe>
 
 ***Report of my team***
 

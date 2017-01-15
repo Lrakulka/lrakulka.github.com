@@ -3,6 +3,8 @@ layout: post
 title:  "Personal tracker"
 date:   2016-09-29 00:00:00 +0100
 categories: IoT Android Samsung ARTIK Cloud
+previewImg: http://lrakulka.github.io/images/CoverImage.jpg
+info: I have created a system which uses smartphone to track people. It can be useful for next purposes: tracking children, workers, grandparents
 ---
 
 ![Cover Image](/images/CoverImage.jpg)

@@ -83,6 +83,7 @@ option (PlayingState)
 ```
 
 Another thing we have had to decide on was to how to make the Goalie detect the incoming shot. At first we were attempting to measure change of distance to the ball in two consecutive moments, but this meant that we have had to introduce our own timers and sleeps for it to be possible. While the timer idea (which checks how much time has passed since the last test, and if enough - measures the distance to the ball again and compares it with previous one) held some promise, we found trying to implement it impractical. Eventually we have decided to rely on simple distance to the ball, seeing how the ball usually will not approach enough for the goalie to react in course of normal play.
+
 ```C
 Listing 2. Goalie.h
 if ( theBallModel.estimate.position.norm() < 1100.f ) // If the ball is close enough
@@ -90,6 +91,7 @@ if ( theBallModel.estimate.position.norm() < 1100.f ) // If the ball is close en
 // It means, that the shot has been
 / / made and it should be defended
 ```
+
 Striker had his own issues, and they have shown themselves only after we moved to real life.
 First of them were the problems with kick strength. While creating the animation responsible for kick, we have easily
 managed to modify the parameters to allow for a strong kick. Surprisingly, these changes caused robot to fall, whenever

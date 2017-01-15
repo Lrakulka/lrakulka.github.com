@@ -3,10 +3,12 @@ layout: post
 title:  "Robot Soccer Team"
 date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
+youtubeId: "MgTiuLhjhVA"
+previewImg: "https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg"
 ---
 
-***Test of our goalkeeper (Click on the image to see video)***
-{% include youtubePlayer.html id="MgTiuLhjhVA" %}
+***Test of our goalkeeper***
+{% include youtubePlayer.html id=page.youtubeId  %}
 
 ***Report of my team***
 

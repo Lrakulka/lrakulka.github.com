@@ -9,6 +9,8 @@ categories: NAO robots soccer
 
 [![Grand Dukes of Luxembourg tests their goalkeeper](https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg)](https://youtu.be/MgTiuLhjhVA)
 
+<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" allowfullscreen></iframe>
+
 ***Report of my team***
 
 Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.

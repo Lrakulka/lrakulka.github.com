@@ -5,6 +5,7 @@ date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
 youtubeId: "MgTiuLhjhVA"
 previewImg: "https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg"
+info: Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.
 ---
 
 ***Test of our goalkeeper***

@@ -4,10 +4,12 @@ title:  "Robot Soccer Team"
 date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
 ---
+<img src="https://github.com/favicon.ico" width="48">
 
-***Test of our goalkeeper***
 
-[![Grand Dukes of Luxembourg tests their goalkeeper](https://i.ytimg.com/vi/MgTiuLhjhVA/hqdefault.jpg?custom=true&w=196&h=110&stc=true&jpg444=true&jpgq=90&sp=68&sigh=O3j8V7c3iC5Kyok3hxWLNkQGrlA)](https://youtu.be/MgTiuLhjhVA)
+***Test of our goalkeeper (Click on the image to see video)***
+
+[![Grand Dukes of Luxembourg tests their goalkeeper](https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg)](https://youtu.be/MgTiuLhjhVA)
 
 ***Report of my team***
 

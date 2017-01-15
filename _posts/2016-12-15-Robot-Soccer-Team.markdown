@@ -7,7 +7,7 @@ categories: NAO robots soccer
 
 ***Test of our goalkeeper (Click on the image to see video)***
 
-<iframe width="420" height="315" src="https://youtu.be/MgTiuLhjhVA" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/watch?v=MgTiuLhjhVA" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
 ***Report of my team***
 

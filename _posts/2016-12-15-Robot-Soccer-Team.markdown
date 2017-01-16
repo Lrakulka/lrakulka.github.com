@@ -3,8 +3,8 @@ layout: post
 title:  "Robot Soccer Team"
 date:   2016-12-15 00:00:00 +0100
 categories: NAO robots soccer
-youtubeId: "MgTiuLhjhVA"
-previewImg: https://i.ytimg.com/vi/MgTiuLhjhVA/maxresdefault.jpg
+youtubeId: 59bS0ZFGmKM
+previewImg: https://i.ytimg.com/vi/59bS0ZFGmKM/hqdefault.jpg
 info: Abstract—The following article is a short summary of work the ”Grand Dukes of Luxembourg” done during Autonomous Robot Software course during winter semester 2017.
 ---
 

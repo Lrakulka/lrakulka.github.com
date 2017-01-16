@@ -20,8 +20,6 @@ layout: default
           <br>
           <br>
           <p>{{ post.info }}</p>
-          <br>
-          <br>
           <input type="button" onclick="location.href='{{ post.url | prepend: site.baseurl }}';" value="Read more" />
         </li>
       {% endif %}
